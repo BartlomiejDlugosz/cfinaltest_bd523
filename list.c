@@ -34,7 +34,15 @@ struct list {
 list make_list( list_cmpf cmpf, list_sprintf spef, list_freef fef )
 {
   // Task 2a: WRITE YOUR OWN CODE HERE
-  return NULL;
+  list list1 = malloc(sizeof(struct list));
+  assert(list1 != NULL);
+  memset(list1, 0, sizeof(struct list));
+
+  list1->cmpf = cmpf;
+  list1->spef = spef;
+  list1->fef = fef;
+
+  return list1;
 }
 
 
@@ -44,7 +52,13 @@ list make_list( list_cmpf cmpf, list_sprintf spef, list_freef fef )
 //
 static listdata listdata_cons( LIST_ELEMENT head, listdata tail ) {
   // Task 2b: WRITE YOUR OWN CODE HERE
-  return NULL;
+  listdata list_data1 = malloc(sizeof(struct listdata));
+  assert(list_data1 != NULL);
+  memset(list_data1, 0, sizeof(struct listdata));
+
+  list_data1->head = head;
+  list_data1->tail = tail;
+  return list_data1;
 }
 
 
@@ -92,6 +106,13 @@ void list_addsorted( list l, LIST_ELEMENT v ) {
   listdata bip;
 
   // Task 2c: WRITE YOUR OWN CODE HERE
+  // Initialise bip to first item in list
+  // Then iterate until either condition is met
+  // Then bip will point to the correct node
+  for (bip = l->data;
+       bip->tail != NULL && l->cmpf(bip->tail->head, v) <= 0;
+       bip = bip->tail) {
+  }
 
   assert( bip != NULL );
   assert( l->cmpf( bip->head, v ) <= 0 );

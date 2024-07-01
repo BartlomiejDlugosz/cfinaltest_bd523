@@ -52,12 +52,23 @@ void person_free( person p ) {
   free( p );
 }
 
+// Helper function which uppercases all characters
+// Input: Pointer to start of string
+void uppercase_string(char *val) {
+    // Iterate until null character
+    while (*val != '\0') {
+        *val = toupper(*val);
+        val++;
+    }
+}
 
 // person_uppercase_names( p );
 //   Uppercase both the person's firstname and lastname.
 //
 void person_uppercase_names( person p ) {
   // Task 1: WRITE YOUR OWN CODE HERE
+  uppercase_string(p->firstname);
+  uppercase_string(p->lastname);
 }
 
 

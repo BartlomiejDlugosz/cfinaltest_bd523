@@ -140,11 +140,21 @@ void dlist_foreach_member( list dl, department_foreachf cb, void *state ) {
   list_foreach( dl, &dept_in_dlist_cb, &s );
 }
 
+// Callback function used to print departments and members
+// Input: Department name, Person, State
+void print_member(char *deptname, person member, void *state) {
+  // Cast state to the target output file
+  FILE *fptr = (FILE *)state;
+  fprintf(fptr, "dept %s, member ", deptname);
+  person_print(fptr, member);
+  fputc('\n', fptr);
+}
 
 // dlist_print( out, dl );
 //	Print dlist dl to file out
 //
 void dlist_print( FILE *out, list dl )
 {
-  list_print( out, dl );
+  // Pass in the output file as the state
+  dlist_foreach_member(dl, print_member, out);
 }
